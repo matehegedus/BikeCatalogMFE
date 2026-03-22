@@ -6,17 +6,11 @@ A monorepo demonstrating **client-side Micro-Frontend composition** using Vite, 
 
 Client-side composition: the App Shell fetches a runtime registry, then dynamically loads each MFE's `remoteEntry.js` in the browser. No server-side stitching.
 
-```
-┌─────────────────────────────────────────┐
-│              App Shell :3000            │
-│  React Router + MFELoader               │
-│  reads mfe-registry.json at boot (:4000)│
-└──────────┬──────────────────┬───────────┘
-           │                  │
-  ┌────────▼──────┐  ┌────────▼──────┐
-  │  Home MFE     │  │ Catalog MFE   │
-  │  :3001        │  │  :3002        │
-  └───────────────┘  └───────────────┘
+
+```mermaid
+flowchart TD
+    A["`**App Shell :3000**<br/>React Router + MFELoader<br/>reads mfe-registry.json at :4000 (serve)`"] --> B["`**Catalogue MFE :3002**`"]
+    A --> C["`**Home MFE :3001**`"]
 ```
 
 | Package                    | Port | Role                                                                     |
@@ -47,9 +41,6 @@ pnpm --version
 
 # If not, install it via npm
 npm install -g pnpm
-
-# Or via the standalone installer (recommended)
-curl -fsSL https://get.pnpm.io/install.sh | sh -
 ```
 
 ## Getting Started
