@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {
   CssBaseline,
@@ -8,8 +8,8 @@ import {
   Box,
 } from "@mui/material";
 import NavBar from "./components/NavBar";
-import MFELoader from "./components/MFELoader";
 import { useMFERegistry } from "./hooks/useMFERegistry";
+import MFELoader from "./components/MFELoader";
 
 const theme = createTheme({
   palette: {
@@ -18,7 +18,7 @@ const theme = createTheme({
       main: "#1a1a2e",
     },
     secondary: {
-      main: "#e94560",
+      main: "#36da80",
     },
   },
   typography: {
@@ -43,8 +43,6 @@ export default function App() {
   const { mfes, loading, error } = useMFERegistry(
     "http://localhost:4000/mfe-registry.json",
   );
-
-  console.log(mfes, "mfes");
 
   return (
     <ThemeProvider theme={theme}>
