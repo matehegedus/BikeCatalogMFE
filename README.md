@@ -11,25 +11,25 @@ flowchart TD
     registry(["mfe-registry.json :4000"])
     shell["`**App Shell :3000**
     React Router · MFELoader · NavBar`"]
-    home["`**Home MFE :3001**
-    exposes ./HomeApp`"]
-    catalog["`**Catalog MFE :3002**
-    exposes ./CatalogApp`"]
-    cart["`**Cart MFE :3003**
-    exposes ./CartApp (lazy UI)
-    exposes ./CartService (eager, headless)`"]
-    bus(["@bike-catalog/event-bus\nshared singleton"])
+    bus(["`**@bike-catalog/event-bus**
+    shared singleton`"])
+    home["`**Home MFE :3001**`"]
+    catalog["`**Catalog MFE :3002**`"]
+    cartservice(["`**Cart MFE :3003** · CartService`"])
+    cartapp["`**Cart MFE :3003**
+    CartApp`"]
 
     registry -->|fetch on boot| shell
+    bus -->|cart:updated| shell
+
     shell -->|lazy load on route| home
     shell -->|lazy load on route| catalog
-    shell -->|eager import on boot| cart
-    shell -->|lazy load on /cart route| cart
+    shell -.->|"eager import on boot (headless)"| cartservice
+    shell -->|lazy load on /cart| cartapp
 
     catalog -->|cart:add| bus
-    bus -->|cart:add| cart
-    cart -->|cart:updated| bus
-    bus -->|cart:updated| shell
+    bus -->|cart:add| cartservice
+    cartservice -->|cart:updated| bus
 ```
 
 | Package                    | Port | Role                                                                                       |
