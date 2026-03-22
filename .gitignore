@@ -1,0 +1,14 @@
+# Dependencies
+**/node_modules
+
+# Build outputs
+/dist
+packages/app-shell/dist
+packages/home-mfe/dist
+packages/catalog-mfe/dist
+
+# Vite cache
+**/.vite
+
+# OS
+.DS_Store
