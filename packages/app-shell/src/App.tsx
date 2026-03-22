@@ -1,43 +1,11 @@
 import { Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import {
-  CssBaseline,
-  ThemeProvider,
-  createTheme,
-  CircularProgress,
-  Box,
-} from "@mui/material";
+import { CssBaseline, ThemeProvider, Box } from "@mui/material";
 import NavBar from "./components/NavBar";
 import { useMFERegistry } from "./hooks/useMFERegistry";
 import MFELoader from "./components/MFELoader";
-
-const theme = createTheme({
-  palette: {
-    mode: "light",
-    primary: {
-      main: "#1a1a2e",
-    },
-    secondary: {
-      main: "#36da80",
-    },
-  },
-  typography: {
-    fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
-  },
-});
-
-function GlobalLoader() {
-  return (
-    <Box
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      minHeight="80vh"
-    >
-      <CircularProgress color="secondary" />
-    </Box>
-  );
-}
+import { theme } from "./theme";
+import GlobalLoader from "./components/GlobalLoader";
 
 export default function App() {
   const { mfes, loading, error } = useMFERegistry(
