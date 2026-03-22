@@ -46,3 +46,7 @@ declare module "virtual:__federation__" {
     module: Record<string, unknown>,
   ): React.ComponentType;
 }
+
+// Headless cart service exposed by cart-mfe.
+// Imported eagerly in bootstrap.tsx — no exports, side-effect only.
+declare module "cartMFE/CartService" {}

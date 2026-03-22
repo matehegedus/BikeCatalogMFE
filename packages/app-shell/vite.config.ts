@@ -23,6 +23,7 @@ export default defineConfig({
       remotes: {
         homeMFE: "http://localhost:3001/assets/remoteEntry.js",
         catalogMFE: "http://localhost:3002/assets/remoteEntry.js",
+        cartMFE: "http://localhost:3003/assets/remoteEntry.js",
       },
       shared: {
         react: { singleton: true, requiredVersion: "^18.0.0" },
@@ -30,6 +31,7 @@ export default defineConfig({
         "@mui/material": { singleton: true, requiredVersion: "^5.0.0" },
         "@emotion/react": { singleton: true, requiredVersion: "^11.0.0" },
         "@emotion/styled": { singleton: true, requiredVersion: "^11.0.0" },
+        "@bike-catalog/event-bus": { singleton: true },
       },
     }),
   ],
