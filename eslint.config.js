@@ -34,8 +34,8 @@ export default tseslint.config(
       // The rule can't introspect into functions that return stable cached refs.
       "react-hooks/static-components": "off",
       "@typescript-eslint/no-unused-vars": [
-        "warn",
-        { argsIgnorePattern: "^_" },
+        "error",
+        { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
       ],
       "@typescript-eslint/no-explicit-any": "warn",
       "no-unused-vars": [
@@ -43,10 +43,10 @@ export default tseslint.config(
         {
           vars: "all",
           args: "after-used",
+          argsIgnorePattern: "^_",
           caughtErrors: "all",
+          caughtErrorsIgnorePattern: "^_",
           ignoreRestSiblings: false,
-          ignoreUsingDeclarations: false,
-          reportUsedIgnorePattern: false,
         },
       ],
     },

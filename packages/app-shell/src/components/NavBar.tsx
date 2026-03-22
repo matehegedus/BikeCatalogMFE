@@ -5,9 +5,14 @@ import {
   Button,
   Box,
   Container,
+  Badge,
+  IconButton,
 } from "@mui/material";
 import DirectionsBikeIcon from "@mui/icons-material/DirectionsBike";
 import { useNavigate, useLocation } from "react-router-dom";
+import { cartBus } from "@bike-catalog/event-bus";
+import { useEffect, useState } from "react";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
 const navLinks = [
   { label: "Home", path: "/" },
@@ -17,6 +22,16 @@ const navLinks = [
 export default function NavBar() {
   const navigate = useNavigate();
   const location = useLocation();
+
+  const [cartSummary, setCartSummary] = useState({ count: 0, total: 0 });
+
+  useEffect(() => {
+    const handler = (summary: { count: number; total: number }) => {
+      setCartSummary(summary);
+    };
+    cartBus.subscribe("cart:updated", handler);
+    return () => cartBus.unsubscribe("cart:updated", handler);
+  }, []);
 
   return (
     <AppBar position="sticky" color="primary" elevation={2}>
@@ -57,6 +72,11 @@ export default function NavBar() {
                 {link.label}
               </Button>
             ))}
+            <IconButton color="inherit" onClick={() => navigate("/cart")}>
+              <Badge badgeContent={cartSummary.count} color="secondary">
+                <ShoppingCartOutlinedIcon />
+              </Badge>
+            </IconButton>
           </Box>
         </Toolbar>
       </Container>

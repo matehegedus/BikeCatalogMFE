@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import { Bike } from "../data/bikes";
 import DirectionsBikeIcon from "@mui/icons-material/DirectionsBike";
+import { cartBus } from "@bike-catalog/event-bus";
 
 const badgeColor: Record<string, "success" | "warning" | "error"> = {
   New: "success",
@@ -115,6 +116,22 @@ export default function BikeCard({ bike }: { bike: Bike }) {
             €{bike.price.toLocaleString()}
           </Typography>
         </Box>
+        <Button
+          variant="contained"
+          color="secondary"
+          size="small"
+          sx={{ fontWeight: 700, borderRadius: 2 }}
+          onClick={() => {
+            cartBus.publish("cart:add", {
+              id: bike.id,
+              name: bike.name,
+              price: bike.price,
+              quantity: 1,
+            });
+          }}
+        >
+          Add
+        </Button>
         <Button
           variant="contained"
           color="primary"

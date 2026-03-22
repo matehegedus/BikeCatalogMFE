@@ -6,10 +6,14 @@ export default defineConfig({
   plugins: [
     react(),
     federation({
-      name: "catalogMFE",
+      name: "cartMFE",
       filename: "remoteEntry.js",
       exposes: {
-        "./CatalogApp": "./src/CatalogApp",
+        // The app-shell will import this via the registry exposedModule field
+        "./CartApp": "./src/CartApp",
+        // Headless service — eagerly loaded by app-shell on boot so cart
+        // state is always tracked regardless of which route is active.
+        "./CartService": "./src/CartService",
       },
       shared: {
         react: { singleton: true, requiredVersion: "^18.0.0" },
@@ -24,13 +28,15 @@ export default defineConfig({
   build: {
     target: "esnext",
     minify: false,
+    // Assets end up at dist/assets/remoteEntry.js – matching the registry URL
     assetsDir: "assets",
   },
   server: {
-    port: 3002,
+    port: 3003,
   },
   preview: {
-    port: 3002,
+    port: 3003,
+    // Allow the app-shell (cross-origin) to load the remote entry
     headers: {
       "Access-Control-Allow-Origin": "*",
     },
