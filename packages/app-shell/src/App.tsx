@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {
   CssBaseline,
@@ -43,8 +43,6 @@ export default function App() {
   const { mfes, loading, error } = useMFERegistry(
     "http://localhost:4000/mfe-registry.json",
   );
-
-  console.log(mfes, "mfes");
 
   return (
     <ThemeProvider theme={theme}>
