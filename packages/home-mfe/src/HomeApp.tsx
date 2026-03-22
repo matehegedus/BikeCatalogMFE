@@ -62,7 +62,7 @@ export default function HomeApp() {
             spacing={2}
             mb={3}
           >
-            <DirectionsBikeIcon sx={{ fontSize: 56, color: "#e94560" }} />
+            <DirectionsBikeIcon color="secondary" sx={{ fontSize: 56 }} />
           </Stack>
           <Typography
             variant="h2"

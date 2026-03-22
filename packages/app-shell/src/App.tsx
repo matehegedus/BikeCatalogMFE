@@ -8,8 +8,8 @@ import {
   Box,
 } from "@mui/material";
 import NavBar from "./components/NavBar";
-import MFELoader from "./components/MFELoader";
 import { useMFERegistry } from "./hooks/useMFERegistry";
+import MFELoader from "./components/MFELoader";
 
 const theme = createTheme({
   palette: {
@@ -18,7 +18,7 @@ const theme = createTheme({
       main: "#1a1a2e",
     },
     secondary: {
-      main: "#e94560",
+      main: "#36da80",
     },
   },
   typography: {

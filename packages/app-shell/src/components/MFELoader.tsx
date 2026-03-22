@@ -1,15 +1,3 @@
-/**
- * MFELoader
- *
- * Dynamically loads a remote microfrontend at runtime using the
- * @originjs/vite-plugin-federation runtime helpers:
- *   - __federation_method_setRemote   → registers remote URL at runtime
- *   - __federation_method_getRemote   → fetches the exposed module
- *   - __federation_method_unwrapDefault → normalises ESM default export
- *
- * This means the host (app-shell) has ZERO knowledge of remote URLs at
- * build-time; everything is driven by mfe-registry.json.
- */
 import { lazy, Suspense, useMemo } from "react";
 import { Box, CircularProgress } from "@mui/material";
 import type { MFERegistryEntry } from "../hooks/useMFERegistry";

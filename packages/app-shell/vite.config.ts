@@ -2,6 +2,14 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import federation from "@originjs/vite-plugin-federation";
 
+// The plugin ships with 'singleton' commented out in its SharedConfig type
+// (a bug in @originjs/vite-plugin-federation@1.4.1) — restore it here.
+declare module "@originjs/vite-plugin-federation" {
+  interface SharedConfig {
+    singleton?: boolean;
+  }
+}
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
