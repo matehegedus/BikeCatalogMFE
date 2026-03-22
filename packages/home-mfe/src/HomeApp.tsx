@@ -1,45 +1,6 @@
-/**
- * HomeApp – exposed module: './HomeApp'
- *
- * Bike brand landing page. Showcases the brand story, tagline and values.
- * This component is the contract boundary with the app-shell: its props
- * should remain stable, any internal implementation can change freely.
- */
-import React from "react";
-import {
-  Box,
-  Container,
-  Typography,
-  Button,
-  Grid,
-  Paper,
-  Stack,
-} from "@mui/material";
+import { Box, Container, Typography, Button, Stack } from "@mui/material";
 import DirectionsBikeIcon from "@mui/icons-material/DirectionsBike";
-import SpeedIcon from "@mui/icons-material/Speed";
-import BuildIcon from "@mui/icons-material/Build";
-import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
-
-const features = [
-  {
-    icon: <SpeedIcon fontSize="large" color="secondary" />,
-    title: "Performance First",
-    description:
-      "Every frame, component and geometry is engineered for maximum speed without sacrificing control.",
-  },
-  {
-    icon: <BuildIcon fontSize="large" color="secondary" />,
-    title: "Handcrafted Quality",
-    description:
-      "Each bike is assembled by our master builders with meticulous attention to detail and precision.",
-  },
-  {
-    icon: <EmojiEventsIcon fontSize="large" color="secondary" />,
-    title: "Race Proven",
-    description:
-      "Born on the track, tested in the championships, available to you. Our DNA is pure competition.",
-  },
-];
+import FeatureList from "./components/FeatureList";
 
 export default function HomeApp() {
   return (
@@ -118,36 +79,7 @@ export default function HomeApp() {
         >
           When Passion meets expertise
         </Typography>
-        <Grid container spacing={4}>
-          {features.map((f) => (
-            <Grid item xs={12} md={4} key={f.title}>
-              <Paper
-                elevation={0}
-                sx={{
-                  p: 4,
-                  height: "100%",
-                  border: "1px solid",
-                  borderColor: "divider",
-                  borderRadius: 3,
-                  transition: "box-shadow 0.2s",
-                  "&:hover": { boxShadow: 4 },
-                }}
-              >
-                <Box mb={2}>{f.icon}</Box>
-                <Typography variant="h6" fontWeight={700} gutterBottom>
-                  {f.title}
-                </Typography>
-                <Typography
-                  variant="body2"
-                  color="text.secondary"
-                  lineHeight={1.8}
-                >
-                  {f.description}
-                </Typography>
-              </Paper>
-            </Grid>
-          ))}
-        </Grid>
+        <FeatureList />
       </Container>
 
       {/* CTA banner */}
