@@ -1,12 +1,11 @@
 /**
- * CartService — headless, no UI.
+ * CartService
  *
- * Eagerly loaded by app-shell/bootstrap.tsx so this module is always alive,
- * regardless of whether the user has visited /cart.
+ * Eagerly loaded by app-shell/bootstrap.tsx so this module is always alive from the beginning
+ * (the cart MFE is loaded lazily, which is not enough, we need this in Shell for the header cart badge)
  *
  * Responsibilities:
  *  - Subscribe to cart:add / cart:remove on the shared event bus
- *  - Maintain cart state as a module-level Map (survives route changes)
  *  - Publish cart:updated summary after every state change
  */
 import { cartBus } from "@bike-catalog/event-bus";
@@ -24,6 +23,11 @@ function publishSummary() {
     total += item.price * item.quantity;
   }
   cartBus.publish("cart:updated", { count, total });
+
+  // rebuild snapshot before notifying, we will compare this to the previously cached one
+  snapshot = [...items.values()];
+  // tell each useCart() instance that data changed — they'll call getCartSnapshot() and re-render
+  listeners.forEach((l) => l());
 }
 
 cartBus.subscribe("cart:add", (event) => {
@@ -34,7 +38,6 @@ cartBus.subscribe("cart:add", (event) => {
     items.set(event.id, { ...event });
   }
 
-  console.log("items", items);
   publishSummary();
 });
 
@@ -42,3 +45,26 @@ cartBus.subscribe("cart:remove", (event) => {
   items.delete(event.id);
   publishSummary();
 });
+
+/**
+ * .......
+ * React-specific part for useCart
+ * .......
+ */
+
+// one callback per useCart() instance — useSyncExternalStore registers here on mount, removes on unmount
+let listeners: Array<() => void> = [];
+
+export function subscribeToCart(cb: () => void) {
+  listeners.push(cb);
+  return () => {
+    listeners = listeners.filter((l) => l !== cb);
+  };
+}
+
+let snapshot: CartItem[] = [];
+
+// cached snapshot — we compare the snapshot within different timelines if the data got changed. if so, it will trigger useCart
+export function getCartSnapshot(): CartItem[] {
+  return snapshot;
+}
