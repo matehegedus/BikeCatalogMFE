@@ -14,7 +14,7 @@ export type CartSummary = {
 
 type CartEventMap = {
   "cart:add": (_event: CartEvent) => void;
-  "cart:remove": (_event: CartEvent) => void;
+  "cart:remove": (_event: { id: string }) => void;
   "cart:update": (_event: CartEvent) => void;
   "cart:updated": (_summary: CartSummary) => void;
 };

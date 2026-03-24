@@ -1,4 +1,5 @@
 import {
+  Button,
   Card,
   CardContent,
   CardHeader,
@@ -6,6 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useCart } from "./hooks/useCart";
+import { cartBus } from "@bike-catalog/event-bus";
 
 export default function CartApp() {
   const cartItems = useCart();
@@ -45,6 +47,13 @@ export default function CartApp() {
                       {cartItem.price * cartItem.quantity}
                     </Typography>
                   </Stack>
+                  <Button
+                    onClick={() => {
+                      cartBus.publish("cart:remove", { id: cartItem.id });
+                    }}
+                  >
+                    Remove
+                  </Button>
                 </Stack>
               </CardContent>
             </Card>
