@@ -9,11 +9,15 @@
     "dev": "pnpm build:remotes && concurrently --names \"REGISTRY,REMOTES,SHELL\" \"pnpm serve:registry\" \"pnpm -r --parallel --filter '!app-shell' preview\" \"pnpm --filter app-shell dev\"",
     "preview": "pnpm build && concurrently --names \"REGISTRY,PKGS\" \"pnpm serve:registry\" \"pnpm -r --parallel preview\"",
     "lint": "eslint packages/*/src",
-    "lint:fix": "eslint packages/*/src --fix"
+    "lint:fix": "eslint packages/*/src --fix",
+    "lighthouse": "lhci autorun",
+    "lighthouse:collect": "lhci collect",
+    "lighthouse:assert": "lhci assert"
   },
   "devDependencies": {
     "@eslint-react/eslint-plugin": "^3.0.0",
     "@eslint/js": "^10.0.1",
+    "@lhci/cli": "^0.15.1",
     "concurrently": "^8.2.2",
     "eslint": "^10.1.0",
     "eslint-plugin-react-hooks": "^7.0.1",

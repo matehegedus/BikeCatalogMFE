@@ -13,3 +13,6 @@ packages/cart-mfe/dist
 
 # OS
 .DS_Store
+
+# Lighthouse CI
+.lighthouseci/
