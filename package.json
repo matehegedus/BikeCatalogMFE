@@ -10,9 +10,7 @@
     "preview": "pnpm build && concurrently --names \"REGISTRY,PKGS\" \"pnpm serve:registry\" \"pnpm -r --parallel preview\"",
     "lint": "eslint packages/*/src",
     "lint:fix": "eslint packages/*/src --fix",
-    "lighthouse": "lhci autorun",
-    "lighthouse:collect": "lhci collect",
-    "lighthouse:assert": "lhci assert"
+    "lighthouse": "lhci autorun"
   },
   "devDependencies": {
     "@eslint-react/eslint-plugin": "^3.0.0",

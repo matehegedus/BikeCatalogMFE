@@ -117,22 +117,10 @@ pnpm lint
 
 # Lint and auto-fix
 pnpm lint:fix
-```
 
-## Lighthouse CI
-
-[`@lhci/cli`](https://github.com/GoogleChrome/lighthouse-ci) is configured via [`.lighthouserc.cjs`](.lighthouserc.cjs) and audits all three routes (`/`, `/catalog`, `/cart`).
-
-```sh
-# Full flow: build → start all servers → audit → assert → stop servers
+# Lighthouse performance test
 pnpm lighthouse
 
-# Collect reports against an already-running stack
-pnpm lighthouse:collect
-
-# Re-assert thresholds against previously collected reports
-pnpm lighthouse:assert
-```
 
 ## How It Works
 
@@ -146,3 +134,4 @@ pnpm lighthouse:assert
    - `CartService` (already loaded) receives the event, updates its internal `Map`, emits `cartBus.publish('cart:updated', { count, total })`
    - `NavBar` in the shell receives `cart:updated` and updates the badge
    - `CartApp` UI is only fetched when the user navigates to `/cart`
+```
