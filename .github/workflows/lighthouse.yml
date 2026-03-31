@@ -28,7 +28,4 @@ jobs:
       - name: Run Lighthouse CI
         run: pnpm lighthouse
         env:
-          # Produces a ✅/❌ status check on every PR.
-          # Add this secret in: Settings → Secrets → Actions → LHCI_GITHUB_APP_TOKEN
-          # Get the token from: https://github.com/apps/lighthouse-ci
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
